@@ -3,10 +3,20 @@ import { electronAPI } from '@electron-toolkit/preload'
 
 // Custom APIs for renderer
 const api = {
-  // cria a função que o react vai chamar
-  salvarAula: (dadosDaAula: any) => { 
-    // invoke manda uma mensagem chamada salvar-nota pro main process
+  salvarAula: (dadosDaAula: any) => {
     return electronAPI.ipcRenderer.invoke('salvar-nota', dadosDaAula)
+  },
+  getMaterias: () => {
+    return electronAPI.ipcRenderer.invoke('get-materias')
+  },
+  addMateria: (novaMateria: string) => {
+    return electronAPI.ipcRenderer.invoke('add-materia', novaMateria)
+  },
+  getNotas: (materia: string) => {
+    return electronAPI.ipcRenderer.invoke('get-notas', materia)
+  },
+  abrirNota: (caminho: string) => {
+    return electronAPI.ipcRenderer.invoke('abrir-nota', caminho)
   }
 }
 
